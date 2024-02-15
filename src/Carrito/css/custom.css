@@ -156,6 +156,8 @@ ul {
   text-align: center;
   border: 1px solid #e1e1e1;
   background: white;
+  display: grid;
+  grid-template-rows: 200px 1fr;
 }
 @media (min-width: 550px) {
   .card {
@@ -164,6 +166,14 @@ ul {
 }
 .info-card {
   padding: 10px 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.info-card img {
+  width: 50%;
+  margin: 5px 0 20px 0;
 }
 
 .info-card p,
@@ -194,4 +204,6 @@ ul {
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin: 10px auto;
 }
