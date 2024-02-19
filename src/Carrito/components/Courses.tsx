@@ -1,9 +1,12 @@
 import { FC } from "react";
-import courses from "../data/courses.json";
+
 import Course from "./Course";
+import { useAppDispatch, useAppSelector } from "../data/hook";
 
 interface CoursesProps {}
 const Courses: FC<CoursesProps> = ({}) => {
+  const courses = useAppSelector((state) => state.cursos);
+
   return (
     <div
       id="lista-cursos"

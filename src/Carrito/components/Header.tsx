@@ -1,5 +1,4 @@
 import { FC } from "react";
-import logo from "../img/logo.jpg";
 import Cart from "./Cart";
 
 interface HeaderProps {}
@@ -13,7 +12,7 @@ const Header: FC<HeaderProps> = ({}) => {
         <div className="row">
           <div className="four columns">
             <img
-              src={logo}
+              src="img-carritoApp/logo.jpg"
               id="logo"
             />
           </div>

@@ -37,7 +37,8 @@ ul {
   list-style: none;
 }
 #hero {
-  background-image: url(../img/hero.jpg);
+  /* background-image: url(../img/hero.jpg); */
+  background-image: url(../../../public/img-carritoApp/hero.jpg);
   height: 350px;
   background-size: cover;
 }
@@ -91,7 +92,8 @@ ul {
   display: block;
   text-indent: -9999px;
   width: 50px;
-  background-image: url(../img/lupa.png);
+  /* background-image: url(../img/lupa.png); */
+  background-image: url(../../../public/img-carritoApp/lupa.png);
   background-position: right center;
   background-repeat: no-repeat;
   border: none;
@@ -136,13 +138,14 @@ ul {
   }
 }
 .icono1 {
-  background-image: url(../img/icono1.png);
+  /* background-image: url(../img/icono1.png); */
+  background-image: url(../../../public/img-carritoApp/icono1.png);
 }
 .icono2 {
-  background-image: url(../img/icono2.png);
+  background-image: url(../../../public/img-carritoApp/icono2.png);
 }
 .icono3 {
-  background-image: url(../img/icono3.png);
+  background-image: url(../../../public/img-carritoApp/icono3.png);
 }
 
 #lista-cursos .row {
@@ -206,4 +209,19 @@ ul {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   margin: 10px auto;
+}
+
+.margin-x {
+  margin: auto 20px;
+  cursor: pointer;
+}
+.totalPrice {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 30px;
+}
+
+.notAvailable {
+  opacity: 0.2;
+  cursor: not-allowed;
 }

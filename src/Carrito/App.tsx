@@ -7,16 +7,20 @@ import Hero from "./components/Hero";
 import Info from "./components/Info";
 import Courses from "./components/Courses";
 import Footer from "./components/Footer";
+import { Provider } from "react-redux";
+import { store } from "./data/store";
 
 interface CarritoAppProps {}
 const CarritoApp: FC<CarritoAppProps> = ({}) => {
   return (
     <>
-      <Header />
-      <Hero />
-      <Info />
-      <Courses />
-      <Footer />
+      <Provider store={store}>
+        <Header />
+        <Hero />
+        <Info />
+        <Courses />
+        <Footer />
+      </Provider>
     </>
   );
 };
