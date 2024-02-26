@@ -3,8 +3,10 @@ import { FC } from "react";
 import Course from "./Course";
 import { useAppDispatch, useAppSelector } from "../data/hook";
 
-interface CoursesProps {}
-const Courses: FC<CoursesProps> = ({}) => {
+interface CoursesProps {
+  title: string;
+}
+const Courses: FC<CoursesProps> = ({ title }) => {
   const courses = useAppSelector((state) => state.cursos);
 
   return (
@@ -16,7 +18,7 @@ const Courses: FC<CoursesProps> = ({}) => {
         id="encabezado"
         className="encabezado"
       >
-        Cursos En Línea
+        {title}
       </h1>
       <div className="grid-container">
         {courses.map((course) => (

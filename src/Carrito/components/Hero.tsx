@@ -1,7 +1,22 @@
-import { FC } from "react";
+import { FC, useState } from "react";
+import { useAppDispatch } from "../data/hook";
+import { searchCourse } from "../data/cursosSlice";
 
 interface HeroProps {}
 const Hero: FC<HeroProps> = ({}) => {
+  const [search, setSearch] = useState<string>("");
+  const dispatch = useAppDispatch();
+
+  const searchingCourse = (e: any) => {
+    setSearch(e.target.value);
+
+    dispatch(
+      searchCourse({
+        search: e.target.value,
+      })
+    );
+  };
+
   return (
     <>
       <div id="hero">
@@ -22,6 +37,11 @@ const Hero: FC<HeroProps> = ({}) => {
                     type="text"
                     placeholder="¿Que te gustaría Aprender?"
                     id="buscador"
+                    onChange={searchingCourse}
+                    value={search}
+                    style={{
+                      color: "#000",
+                    }}
                   />
                   <input
                     type="submit"

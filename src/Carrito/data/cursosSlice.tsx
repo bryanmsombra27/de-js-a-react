@@ -29,16 +29,50 @@ export const cursosSlice = createSlice({
     },
     addSpaceCourse: (state, action: PayloadAction<{ id: number }>) => {
       state.map((item) => {
-        if (item.id === action.payload.id && item.stock < 9) {
+        if (item.id === action.payload.id) {
           item.stock++;
         } else {
           return item;
         }
       });
     },
+    resetSpaceCourse: (state, action: PayloadAction<{ id: number }>) => {
+      state = state.map((item) => {
+        if (item.id == action.payload.id) {
+          item.stock = 10;
+          return item;
+        } else return item;
+      });
+    },
+    resetAllSpaceCourse: (state) => {
+      state = state.map((item) => {
+        item.stock = 10;
+        return item;
+      });
+    },
+    searchCourse: (state, action) => {
+      state = state.filter((item) => {
+        if (
+          item.title.toLowerCase().includes(action.payload.search.toLowerCase())
+        ) {
+          return item;
+        }
+      });
+      if (action.payload.search.length == 0) {
+        state = initialState;
+      }
+
+      return state;
+    },
   },
 });
 
-export const { removeSpaceCourse, addSpaceCourse } = cursosSlice.actions;
+export const {
+  removeSpaceCourse,
+  addSpaceCourse,
+  resetSpaceCourse,
+  resetAllSpaceCourse,
+  searchCourse,
+} = cursosSlice.actions;
 
 export default cursosSlice.reducer;

@@ -1,5 +1,6 @@
 import { FC } from "react";
 import Cart from "./Cart";
+import { Link, NavLink } from "react-router-dom";
 
 interface HeaderProps {}
 const Header: FC<HeaderProps> = ({}) => {
@@ -19,6 +20,17 @@ const Header: FC<HeaderProps> = ({}) => {
           <div className="two columns u-pull-right">
             <ul>
               <Cart />
+            </ul>
+          </div>
+
+          <div className="nav">
+            <ul>
+              <li>
+                <NavLink to="/">Home</NavLink>
+              </li>
+              <li>
+                <NavLink to="/mis-cursos">Mis cursos</NavLink>
+              </li>
             </ul>
           </div>
         </div>

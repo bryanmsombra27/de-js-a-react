@@ -21,7 +21,7 @@ export const carritoSlice = createSlice({
 
       if (findItem) {
         state.map((item) => {
-          if (findItem.id == item.id && item.quantity < action.payload.stock) {
+          if (findItem.id == item.id) {
             item.quantity++;
           } else {
             return item;
@@ -52,13 +52,18 @@ export const carritoSlice = createSlice({
         });
       }
     },
-
+    removeFromCart: (state, action: PayloadAction<{ id: number }>) => {
+      state = state.filter((item) => item.id != action.payload.id);
+      return state;
+    },
     clearCart: (state) => {
       state = [];
+      return state;
     },
   },
 });
 
-export const { addToCart, clearCart, lessToCart } = carritoSlice.actions;
+export const { addToCart, clearCart, lessToCart, removeFromCart } =
+  carritoSlice.actions;
 
 export default carritoSlice.reducer;

@@ -225,3 +225,41 @@ ul {
   opacity: 0.2;
   cursor: not-allowed;
 }
+
+.relative {
+  position: relative;
+}
+.float-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 15px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  display: block;
+  margin: 15px;
+  cursor: pointer;
+  background: rgb(196, 25, 25);
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}
+
+.nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  align-items: center;
+}
+.nav ul li {
+  cursor: pointer;
+}
+.nav ul li a {
+  text-decoration: none;
+  color: #000;
+}
+
+.nav ul li a.active {
+  color: crimson;
+}

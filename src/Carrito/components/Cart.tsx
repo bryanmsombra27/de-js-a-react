@@ -5,18 +5,23 @@ import {
   addToCart,
   clearCart,
   lessToCart,
+  removeFromCart,
 } from "../data/carritoSlice";
-import { addSpaceCourse, removeSpaceCourse } from "../data/cursosSlice";
+import {
+  addSpaceCourse,
+  removeSpaceCourse,
+  resetAllSpaceCourse,
+  resetSpaceCourse,
+} from "../data/cursosSlice";
 
 interface CartProps {}
 const Cart: FC<CartProps> = ({}) => {
+  const dispatch = useAppDispatch();
   const carrito = useAppSelector((state) => state.carrito);
   const totalPrice = carrito.reduce(
     (acc, current) => acc + current.price * current.quantity,
     0
   );
-
-  const dispatch = useAppDispatch();
 
   const addCart = (item: Carrito) => {
     dispatch(
@@ -42,10 +47,14 @@ const Cart: FC<CartProps> = ({}) => {
       })
     );
   };
+  const removeCourseFromCart = (id: number) => {
+    dispatch(removeFromCart({ id }));
+    dispatch(resetSpaceCourse({ id }));
+  };
 
   const cleanCart = () => {
-    console.log("LIMPIAR CARRITO");
     dispatch(clearCart());
+    dispatch(resetAllSpaceCourse());
   };
 
   return (
@@ -72,7 +81,11 @@ const Cart: FC<CartProps> = ({}) => {
               </thead>
               <tbody>
                 {carrito.map((item) => (
-                  <tr key={item.id}>
+                  <tr
+                    key={item.id}
+                    className="relative"
+                    // onClick={() => removeCourseFromCart(item.id)}
+                  >
                     <td>
                       <img
                         src={item.image}
@@ -82,12 +95,15 @@ const Cart: FC<CartProps> = ({}) => {
                     <td>{item.name}</td>
                     <td>{item.price}</td>
                     <td>
-                      <span
-                        className="margin-x"
-                        onClick={() => lessFromCart(item.id)}
-                      >
-                        -
-                      </span>
+                      {item.quantity > 1 && (
+                        <span
+                          className="margin-x"
+                          onClick={() => lessFromCart(item.id)}
+                        >
+                          -
+                        </span>
+                      )}
+
                       {item.quantity}
                       {item.quantity < item.stock && (
                         <span
@@ -97,6 +113,12 @@ const Cart: FC<CartProps> = ({}) => {
                           +
                         </span>
                       )}
+                      <span
+                        onClick={() => removeCourseFromCart(item.id)}
+                        className="float-button"
+                      >
+                        X
+                      </span>
                     </td>
                   </tr>
                 ))}
