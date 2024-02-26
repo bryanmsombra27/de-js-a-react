@@ -263,3 +263,15 @@ ul {
 .nav ul li a.active {
   color: crimson;
 }
+
+.btn {
+  display: block;
+  background: crimson;
+  color: white;
+}
+.dflex {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  margin-top: 20px;
+}

@@ -8,16 +8,19 @@ import {
   removeFromCart,
 } from "../data/carritoSlice";
 import {
+  Curso,
   addSpaceCourse,
   removeSpaceCourse,
   resetAllSpaceCourse,
   resetSpaceCourse,
 } from "../data/cursosSlice";
+import { courses } from "../data/myCoursesSlice";
 
 interface CartProps {}
 const Cart: FC<CartProps> = ({}) => {
   const dispatch = useAppDispatch();
   const carrito = useAppSelector((state) => state.carrito);
+  const cursos = useAppSelector((state) => state.cursos);
   const totalPrice = carrito.reduce(
     (acc, current) => acc + current.price * current.quantity,
     0
@@ -55,6 +58,26 @@ const Cart: FC<CartProps> = ({}) => {
   const cleanCart = () => {
     dispatch(clearCart());
     dispatch(resetAllSpaceCourse());
+  };
+
+  const buyCart = () => {
+    const myCourses: Curso[] = [];
+
+    for (const item of carrito) {
+      const course = cursos.find((cour) => cour.id === item.id)!;
+
+      myCourses.push({
+        ...course,
+        isBuying: true,
+      });
+    }
+
+    dispatch(
+      courses({
+        courses: myCourses,
+      })
+    );
+    dispatch(clearCart());
   };
 
   return (
@@ -131,17 +154,25 @@ const Cart: FC<CartProps> = ({}) => {
               </h6>
             </div>
 
-            <a
-              href="#"
-              id="vaciar-carrito"
-              className="button u-full-width"
-              onClick={(e) => {
-                e.preventDefault();
-                cleanCart();
-              }}
-            >
-              Vaciar Carrito
-            </a>
+            <div className="dflex">
+              <a
+                href="#"
+                id="vaciar-carrito"
+                className="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  cleanCart();
+                }}
+              >
+                Vaciar Carrito
+              </a>
+              <button
+                className="btn"
+                onClick={buyCart}
+              >
+                Comprar Cursos
+              </button>
+            </div>
           </>
         ) : (
           <h5>No se han agregado cursos al carrito</h5>

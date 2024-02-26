@@ -12,6 +12,7 @@ export type Course = {
   stock: number;
   totalPrice?: number;
   discountPrice: number;
+  isBuying?: boolean;
 };
 
 interface CourseProps {
@@ -35,7 +36,11 @@ const Course: FC<CourseProps> = ({ course }) => {
 
   return (
     <>
-      <div className={`card ${course.stock == 0 && "notAvailable"}`}>
+      <div
+        className={`card ${
+          !course.isBuying && course.stock == 0 && "notAvailable"
+        }`}
+      >
         <img
           src={course.courseImage}
           className="imagen-curso u-full-width"
@@ -44,24 +49,29 @@ const Course: FC<CourseProps> = ({ course }) => {
           <h4>{course.title}</h4>
           <p>{course.author}</p>
           <img src={course.stars} />
-          <p>
-            Cupos disponibles: <strong>{course.stock}</strong>{" "}
-          </p>
-          <p className="precio">
-            ${course.totalPrice}{" "}
-            <span className="u-pull-right ">${course.discountPrice}</span>
-          </p>
-          {course.stock > 0 && (
-            <a
-              href="#"
-              className="u-full-width button-primary button input agregar-carrito"
-              onClick={(e) => {
-                e.preventDefault();
-                addCart(course);
-              }}
-            >
-              Agregar Al Carrito
-            </a>
+
+          {!course.isBuying && (
+            <>
+              <p>
+                Cupos disponibles: <strong>{course.stock}</strong>{" "}
+              </p>
+              <p className="precio">
+                ${course.totalPrice}{" "}
+                <span className="u-pull-right ">${course.discountPrice}</span>
+              </p>
+              {course.stock > 0 && (
+                <a
+                  href="#"
+                  className="u-full-width button-primary button input agregar-carrito"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    addCart(course);
+                  }}
+                >
+                  Agregar Al Carrito
+                </a>
+              )}
+            </>
           )}
         </div>
       </div>

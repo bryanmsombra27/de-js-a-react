@@ -10,6 +10,7 @@ export interface Curso {
   stock: number;
   totalPrice: number;
   discountPrice: number;
+  isBuying?: boolean;
 }
 
 const initialState: Curso[] = courses;
