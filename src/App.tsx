@@ -1,9 +1,7 @@
-import CarritoApp from "./Carrito/App";
-
 function App() {
   return (
     <>
-      <CarritoApp />
+      <h1>Template</h1>
     </>
   );
 }
