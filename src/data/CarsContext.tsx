@@ -20,9 +20,7 @@ export interface Cars {
 }
 interface CarsContext {
   cars: Cars[];
-  filters: CarsFilter;
-  setFilters: React.Dispatch<React.SetStateAction<CarsFilter>>;
-  addFilters: (obj: any, atis: any) => void;
+  addFilters: (obj: any) => void;
   resetFilters: () => void;
 }
 
@@ -33,17 +31,8 @@ const CarsContext = createContext<CarsContext | null>(null);
 
 export const CarsContextProvider = ({ children }: CarsContextProvider) => {
   const [cars, setCars] = useState<Cars[]>(autos);
-  const [filters, setFilters] = useState<any>({
-    brand: "",
-    year: "",
-    minPrice: 0,
-    maxPrice: 0,
-    doors: 2,
-    transmition: "",
-    color: "",
-  });
 
-  const addFilters = (filtered: any, atis: any) => {
+  const addFilters = (filtered: any) => {
     let filteredCars: Cars[] = [];
     for (const filter in filtered) {
       if (filteredCars.length == 0) {
@@ -76,9 +65,7 @@ export const CarsContextProvider = ({ children }: CarsContextProvider) => {
   };
 
   return (
-    <CarsContext.Provider
-      value={{ cars, filters, setFilters, addFilters, resetFilters }}
-    >
+    <CarsContext.Provider value={{ cars, addFilters, resetFilters }}>
       {children}
     </CarsContext.Provider>
   );

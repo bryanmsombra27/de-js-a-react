@@ -3,8 +3,7 @@ import { useFormik, FormikConfig } from "formik";
 import { CarsFilter, useCarsContext } from "../data/CarsContext";
 interface FormProps {}
 const Form: FC<FormProps> = ({}) => {
-  const { setFilters, addFilters, filters, cars, resetFilters } =
-    useCarsContext();
+  const { addFilters, resetFilters } = useCarsContext();
   const { handleSubmit, handleChange, values } = useFormik<CarsFilter>({
     initialValues: {
       brand: "",
@@ -16,7 +15,6 @@ const Form: FC<FormProps> = ({}) => {
       color: "",
     },
     onSubmit: (values: any) => {
-      console.log(values, "FORM");
       let obj: any = {};
       for (const key in values) {
         if (values[key] !== "") {
@@ -26,9 +24,8 @@ const Form: FC<FormProps> = ({}) => {
           };
         }
       }
-      console.log(obj, "FILTROS SETEADOS");
 
-      addFilters(obj, cars);
+      addFilters(obj);
     },
   });
 
