@@ -7,13 +7,14 @@ import Toast from "./Toast";
 import CategoriesByIds from "./CategoriesByIds";
 import { useAppSelector } from "../store/hooks";
 import RecipeModal from "./RecipeModal";
+import Spinner from "./Spinner";
 
 interface MainProps {}
 const Main: FC<MainProps> = ({}) => {
   useEffect(() => {
     getCategories();
   }, []);
-  const { categoryById } = useFilterByCategory();
+  const { categoryById, isLoading } = useFilterByCategory();
   const { showToast } = useAppSelector((state) => state.recipes);
 
   return (
@@ -27,12 +28,17 @@ const Main: FC<MainProps> = ({}) => {
           id="resultado"
           className="mt-5 row"
         >
-          {categoryById &&
+          {isLoading ? (
+            <div className="d-flex justify-content-center align-center">
+              <Spinner />
+            </div>
+          ) : (
             categoryById?.map((item) => (
               <>
                 <CategoriesByIds item={item} />
               </>
-            ))}
+            ))
+          )}
         </div>
       </main>
       <RecipeModal favoriteMode={false} />

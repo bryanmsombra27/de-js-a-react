@@ -8,6 +8,7 @@ import {
   setRecipe,
 } from "../slices/RecipeSlice";
 import { Meal } from "../interfaces/FilterCategories.interface";
+import Spinner from "./Spinner";
 
 interface RecipeModalProps {
   favoriteMode: boolean;
@@ -46,55 +47,61 @@ const RecipeModal: FC<RecipeModalProps> = ({ favoriteMode }) => {
     <Modal
       title={recipe?.strMeal!}
       body={
-        <>
-          <img
-            src={recipe?.strMealThumb}
-            className="img-fluid"
-            alt="meal image"
-          />
-          <p className="mt-3">{recipe?.strInstructions}</p>
-          <h4 className="text-center mb-3">Ingredientes y cantidades</h4>
-          <ul className="list-group">
-            {Array.from(
-              { length: 20 },
-              (_, index) =>
-                recipe &&
-                recipe[`strIngredient${index + 1}`] &&
-                recipe[`strMeasure${index + 1}`] && (
-                  <li className="list-group-item d-flex justify-content-around">
-                    <span>{recipe[`strIngredient${index + 1}`]}</span>
-                    <span>{recipe[`strMeasure${index + 1}`]}</span>
-                  </li>
-                )
-            )}
-          </ul>
-          <div className="d-flex w-100 gap-3 mt-4">
-            <button
-              type="button"
-              className="btn btn-secondary w-50"
-              data-bs-dismiss="modal"
-              id="saveFav"
-              aria-label="Close"
-            >
-              Cerrar
-            </button>
-            {!favoriteMode ? (
-              <button
-                className="btn btn-danger w-50"
-                onClick={addRecipeToFavorites}
-              >
-                Guardar Favorito
-              </button>
-            ) : (
-              <button
-                className="btn btn-danger w-50"
-                onClick={deleteFromFavorites}
-              >
-                Eliminar del listado
-              </button>
-            )}
+        isLoading ? (
+          <div className="d-flex justify-content-center align-center">
+            <Spinner />
           </div>
-        </>
+        ) : (
+          <>
+            <img
+              src={recipe?.strMealThumb}
+              className="img-fluid"
+              alt="meal image"
+            />
+            <p className="mt-3">{recipe?.strInstructions}</p>
+            <h4 className="text-center mb-3">Ingredientes y cantidades</h4>
+            <ul className="list-group">
+              {Array.from(
+                { length: 20 },
+                (_, index) =>
+                  recipe &&
+                  recipe[`strIngredient${index + 1}`] &&
+                  recipe[`strMeasure${index + 1}`] && (
+                    <li className="list-group-item d-flex justify-content-around">
+                      <span>{recipe[`strIngredient${index + 1}`]}</span>
+                      <span>{recipe[`strMeasure${index + 1}`]}</span>
+                    </li>
+                  )
+              )}
+            </ul>
+            <div className="d-flex w-100 gap-3 mt-4">
+              <button
+                type="button"
+                className="btn btn-secondary w-50"
+                data-bs-dismiss="modal"
+                id="saveFav"
+                aria-label="Close"
+              >
+                Cerrar
+              </button>
+              {!favoriteMode ? (
+                <button
+                  className="btn btn-danger w-50"
+                  onClick={addRecipeToFavorites}
+                >
+                  Guardar Favorito
+                </button>
+              ) : (
+                <button
+                  className="btn btn-danger w-50"
+                  onClick={deleteFromFavorites}
+                >
+                  Eliminar del listado
+                </button>
+              )}
+            </div>
+          </>
+        )
       }
     />
   );
